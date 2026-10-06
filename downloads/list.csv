@@ -1,0 +1,10 @@
+---
+# Spreadsheet download (CSV opens in Excel, Numbers, and Google Sheets).
+# Every text field is wrapped in quotes with inner quotes doubled, per the
+# CSV format. The invisible character before "Title" tells Excel the file
+# is UTF-8, so accented names display correctly.
+permalink: /ergodic-literature.csv
+---
+﻿Title,Author,Year published,Description,Categories
+{% assign works = site.data.works | sort_natural: "title" %}{% for w in works %}{% assign categories = "" | split: "" %}{% for id in w.mechanics %}{% assign m = site.data.mechanics | where: "id", id | first %}{% assign categories = categories | push: m.label %}{% endfor %}"{{ w.title | replace: '"', '""' }}","{{ w.author | replace: '"', '""' }}",{{ w.year }},"{{ w.summary | replace: '"', '""' }}","{{ categories | join: '; ' }}"
+{% endfor -%}

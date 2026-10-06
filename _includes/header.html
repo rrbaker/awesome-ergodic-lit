@@ -1,0 +1,13 @@
+{%- comment -%} Nav items: "path:Label". The current page gets aria-current, which also styles it. {%- endcomment -%}
+{%- assign nav = "/:The list,/mechanics/:Ways of reading,/resources/:Resources,/about/:About" | split: "," -%}
+<header class="mx-auto flex max-w-3xl flex-wrap items-baseline justify-between gap-x-10 gap-y-4 px-6 pt-10 pb-12 sm:pt-16 sm:pb-20">
+  <a href="{{ '/' | relative_url }}" class="quiet-link label text-base text-ink">{{ site.title }}</a>
+  <nav aria-label="Main">
+    <ul class="flex flex-wrap gap-x-6 gap-y-1">
+      {%- for item in nav %}
+      {%- assign parts = item | split: ":" %}
+      <li><a href="{{ parts[0] | relative_url }}" class="quiet-link label text-ink-soft aria-[current=page]:text-ink aria-[current=page]:underline" {% if page.url == parts[0] %}aria-current="page"{% endif %}>{{ parts[1] }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+</header>

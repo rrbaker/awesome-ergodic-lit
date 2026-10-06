@@ -1,0 +1,1210 @@
+# One entry per work. This file is the source of truth for the site and for
+# the generated sections of README.md (run scripts/build-readme after editing).
+#
+# Fields:
+#   id                kebab-case, unique; becomes the page URL /works/<id>/
+#   title, author     as commonly published
+#   year              first publication
+#   original_language
+#   medium            print | digital | hybrid
+#   needs_physical    true if the ergodic effect depends on the physical object
+#   mechanics         ids from _data/mechanics.yml; list the dominant one FIRST
+#                     (README.md groups each work under its first mechanic)
+#   summary           one or two sentences on what the reader must do
+#   links             label + url pairs
+#   verified          false until a human has checked the entry (see CONTRIBUTING.md)
+
+- id: house-of-leaves
+  title: House of Leaves
+  author: Mark Z. Danielewski
+  year: 2000
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - footnote-maze
+    - typographic
+  summary: >-
+    The reader follows nested footnotes, appendices, and an index across
+    several narrators, and has to turn the book, read mirrored text, and track
+    passages that thin to a few words per page.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/House_of_Leaves
+    - label: Author's site
+      url: https://www.markzdanielewski.com/
+  verified: false
+
+- id: only-revolutions
+  title: Only Revolutions
+  author: Mark Z. Danielewski
+  year: 2006
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - multiple-paths
+    - typographic
+  summary: >-
+    Two narrators’ accounts start from opposite covers, printed upside down
+    relative to each other; the reader flips the book back and forth, usually
+    eight pages at a time, alongside marginal chronology columns.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Only_Revolutions
+  verified: false
+
+- id: pale-fire
+  title: Pale Fire
+  author: Vladimir Nabokov
+  year: 1962
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - footnote-maze
+  summary: >-
+    A 999-line poem arrives wrapped in a foreword, line-by-line commentary,
+    and index by an unreliable editor; the story emerges as the reader chases
+    cross-references between poem, notes, and index.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Pale_Fire
+  verified: false
+
+- id: hopscotch
+  title: Hopscotch (Rayuela)
+  author: Julio Cortázar
+  year: 1963
+  original_language: Spanish
+  medium: print
+  needs_physical: false
+  mechanics:
+    - multiple-paths
+  summary: >-
+    A table of instructions offers two books: read chapters 1–56 in order, or
+    start at chapter 73 and hop through all 155 chapters following the number
+    printed at the end of each.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Hopscotch_(Cort%C3%A1zar_novel)
+  verified: false
+
+- id: dictionary-of-the-khazars
+  title: Dictionary of the Khazars
+  author: Milorad Pavić
+  year: 1984
+  original_language: Serbian
+  medium: print
+  needs_physical: false
+  mechanics:
+    - lexicon
+    - multiple-paths
+  summary: >-
+    Three cross-referenced encyclopedias (Christian, Islamic, and Jewish) tell
+    overlapping versions of one event; the reader picks any entry and follows
+    symbols between books. Published in “male” and “female” editions that
+    differ by one paragraph.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Dictionary_of_the_Khazars
+  verified: false
+
+- id: if-on-a-winters-night-a-traveler
+  title: If on a winter's night a traveler
+  author: Italo Calvino
+  year: 1979
+  original_language: Italian
+  medium: print
+  needs_physical: false
+  mechanics:
+    - multiple-paths
+  summary: >-
+    Second-person chapters about “you, the Reader” alternate with the openings
+    of ten different novels, each broken off; the reader assembles the frame
+    story across the interruptions.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/If_on_a_winter%27s_night_a_traveler
+  verified: false
+
+- id: composition-no-1
+  title: Composition No. 1
+  author: Marc Saporta
+  year: 1962
+  original_language: French
+  medium: print
+  needs_physical: true
+  mechanics:
+    - reader-assembled
+  summary: >-
+    About 150 unbound, unnumbered pages come in a box; the reader shuffles
+    them and reads in whatever order results.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Composition_No._1
+  verified: false
+
+- id: the-unfortunates
+  title: The Unfortunates
+  author: B. S. Johnson
+  year: 1969
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - reader-assembled
+  summary: >-
+    Twenty-seven separately bound sections come in a box; the first and last
+    are marked, and the reader reads the rest in any order.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/The_Unfortunates
+  verified: false
+
+- id: cent-mille-milliards-de-poemes
+  title: Cent mille milliards de poèmes
+  author: Raymond Queneau
+  year: 1961
+  original_language: French
+  medium: print
+  needs_physical: true
+  mechanics:
+    - permutational
+    - physical-intervention
+  summary: >-
+    Ten sonnets are printed with each line on a separate cut strip; the reader
+    turns strips independently to compose any of 10^14 possible sonnets.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Hundred_Thousand_Billion_Poems
+  verified: false
+
+- id: tree-of-codes
+  title: Tree of Codes
+  author: Jonathan Safran Foer
+  year: 2010
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - physical-intervention
+  summary: >-
+    Die-cut from an English translation of Bruno Schulz’s The Street of
+    Crocodiles; holes in each page expose words on the pages beneath, so the
+    reader reads through layers of paper.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Tree_of_Codes
+  verified: false
+
+- id: s
+  title: S.
+  author: J. J. Abrams & Doug Dorst
+  year: 2013
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - annotated-dialogue
+    - physical-intervention
+  summary: >-
+    A fictional library novel carries two readers’ handwritten marginal
+    conversation, layered by ink color across time, plus loose inserts; the
+    reader decides how to interleave text, margins, and ephemera.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/S._(Dorst_novel)
+  verified: false
+
+- id: building-stories
+  title: Building Stories
+  author: Chris Ware
+  year: 2012
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - reader-assembled
+  summary: >-
+    A box of fourteen printed pieces (books, pamphlets, broadsheets, a fold-out
+    board) with no prescribed order; the reader chooses the sequence.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Building_Stories
+  verified: false
+
+- id: "253" # quoted so YAML reads it as text, not a number
+  title: "253"
+  author: Geoff Ryman
+  year: 1996
+  original_language: English
+  medium: hybrid
+  needs_physical: false
+  mechanics:
+    - hypertext
+  summary: >-
+    Each of 253 passengers on a London Underground train gets exactly 253
+    words; the reader moves between passengers through links (on the web) or
+    cross-references (in the 1998 print remix).
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/253_(novel)
+    - label: Original website (archived)
+      url: http://web.archive.org/web/19971210131346/http://www.ryman-novel.com:80/
+  verified: false
+
+- id: afternoon-a-story
+  title: afternoon, a story
+  author: Michael Joyce
+  year: 1987
+  original_language: English
+  medium: digital
+  needs_physical: false
+  mechanics:
+    - hypertext
+  summary: >-
+    A Storyspace hypertext in which the reader chooses words that “yield” to
+    other passages; conditional links change what appears based on the path
+    already taken.
+  links:
+    - label: Wikipedia
+      url: https://en.wikipedia.org/wiki/Afternoon,_a_story
+    - label: Eastgate Systems
+      url: http://www.eastgate.com/catalog/Afternoon.html
+  verified: false
+
+- id: the-raw-shark-texts
+  title: The Raw Shark Texts
+  author: Steven Hall
+  year: 2007
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - typographic
+  summary: >-
+    A conceptual shark made of words swims through the text; the reader
+    watches it form out of typography and flips a long sequence of pages to
+    see it move toward them.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/2081374.The_Raw_Shark_Texts
+  verified: false
+
+- id: illuminae
+  title: Illuminae
+  author: Amie Kaufman & Jay Kristoff
+  year: 2015
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Told entirely through a dossier of hacked files (chat logs, emails,
+    schematics, AI transcripts), with text set in spirals and shapes; the
+    reader reconstructs events across formats.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/23395680-illuminae
+  verified: false
+
+- id: the-strange-library
+  title: The Strange Library
+  author: Haruki Murakami
+  year: 2005
+  original_language: Japanese
+  medium: print
+  needs_physical: true
+  mechanics:
+    - physical-intervention
+  summary: >-
+    The illustrated English edition, designed by Chip Kidd, opens with a
+    folding flap like a library pamphlet and mixes found images into the
+    story, so handling the object is part of reading it.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/23128304-the-strange-library
+  verified: false
+
+- id: you-are-reading-these-words
+  title: You Are Reading These Words
+  author: David de Léon
+  year: 2026
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - gamebook
+  summary: >-
+    The book addresses the reader directly and sets fourteen exercises to
+    perform, some in a chair and some out in the world; the reading happens in
+    the doing.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/245931535-you-are-reading-these-words
+  verified: false
+
+- id: codex-unfertho
+  title: Codex Unfertho
+  author: Kienn Nguyen
+  year: 2026
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - footnote-maze
+    - physical-intervention
+    - typographic
+  summary: >-
+    Two vanished scholars leave a labyrinth of notes, footnotes, ciphers, and
+    redactions; the reader deciphers them and may cut, tear, or fold the
+    pages.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/252695236-codex-unfertho
+  verified: false
+
+- id: night-film
+  title: Night Film
+  author: Marisha Pessl
+  year: 2013
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A thriller interleaved with mocked-up web pages, police reports, and
+    photographs; a companion app once unlocked extra material from images in
+    the book. Read in order.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/10281556-night-film
+  verified: false
+
+- id: cains-jawbone
+  title: Cain's Jawbone
+  author: E. Powys Mathers
+  year: 1934
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - reader-assembled
+  summary: >-
+    One hundred pages printed deliberately out of order; the reader must put
+    them back in sequence and name six murderers and their victims.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/50074593-cain-s-jawbone
+  verified: false
+
+- id: bats-of-the-republic
+  title: Bats of the Republic
+  author: Zachary Thomas Dodson
+  year: 2015
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - physical-intervention
+    - typographic
+  summary: >-
+    Two stories set two centuries apart, told through letters, maps, and
+    specimen drawings, ending with a sealed envelope bound into the book that
+    the story warns you not to open.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/24724564-bats-of-the-republic
+  verified: false
+
+- id: crossings
+  title: Crossings
+  author: Alex Landragin
+  year: 2020
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - multiple-paths
+  summary: >-
+    Three stories can be read straight through, or in the alternate chapter
+    order given at the front, which tells a different story.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/51170065-crossings
+  verified: false
+
+- id: ella-minnow-pea
+  title: Ella Minnow Pea
+  author: Mark Dunn
+  year: 2001
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    An epistolary novel in which letters of the alphabet are banned one by one
+    and vanish from the text, so the prose grows harder to read as the story
+    goes on. Read in order.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/16200.Ella_Minnow_Pea
+  verified: false
+
+- id: multiple-choice
+  title: Multiple Choice
+  author: Alejandro Zambra
+  year: 2014
+  original_language: Spanish
+  medium: print
+  needs_physical: false
+  mechanics:
+    - gamebook
+  summary: >-
+    Modeled on Chile’s university entrance exam; the reader answers
+    multiple-choice, sentence-ordering, and reading-comprehension questions,
+    and the answers shape what the stories mean.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/28588315-multiple-choice
+  verified: false
+
+- id: meanwhile
+  title: Meanwhile
+  author: Jason Shiga
+  year: 2010
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - gamebook
+    - physical-intervention
+  summary: >-
+    A branching comic: the reader follows tubes from panel to panel and jumps
+    between pages using printed tabs, through thousands of possible stories.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/7229730-meanwhile
+  verified: false
+
+- id: here
+  title: Here
+  author: Richard McGuire
+  year: 2014
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Every spread shows the same corner of one room, with inset panels from
+    different years layered over it; the reader moves across centuries within
+    a single page.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/20587888-here
+  verified: false
+
+- id: float
+  title: Float
+  author: Anne Carson
+  year: 2016
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - reader-assembled
+  summary: >-
+    Twenty-two chapbooks loose in a clear case, with no prescribed order; the
+    reader decides what to read and when.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/26046366-float
+  verified: false
+
+- id: lolita
+  title: Lolita
+  author: Vladimir Nabokov
+  year: 1955
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - footnote-maze
+  summary: >-
+    Framed as a confession with a fictional editor’s foreword; read in order,
+    but the narrator’s anagrams, allusions, and planted clues reward
+    rereading.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/3486989-lolita
+  verified: false
+
+- id: follow-this-thread
+  title: Follow This Thread
+  author: Henry Eliot
+  year: 2018
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A history of mazes laid out as one: a thread runs across every page, and
+    the reader follows it through puzzles and branching paths.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/40588296-follow-this-thread
+  verified: false
+
+- id: themystery-doc
+  title: theMystery.doc
+  author: Matthew McIntosh
+  year: 2017
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    More than 1,600 pages of fragments, transcripts, photographs, blank pages,
+    and screenshots; the reader assembles a story from a document that keeps
+    changing form.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/34129245-themystery-doc
+  verified: false
+
+- id: z213-exit
+  title: "Z213: Exit"
+  author: Dimitris Lyacos
+  year: 2009
+  original_language: Greek
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A fugitive’s diary in broken fragments, with gaps and bracketed omissions;
+    the reader reconstructs the journey from what remains.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/31852058-z213
+  verified: false
+
+- id: we-used-to-live-here
+  title: We Used to Live Here
+  author: Marcus Kliewer
+  year: 2024
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A horror novel interleaved with found documents; Morse code at the end of
+    each interlude and stray capital letters spell hidden messages for the
+    reader to decode. Otherwise read in order.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/199798006-we-used-to-live-here
+  verified: false
+
+- id: the-selected-works-of-ts-spivet
+  title: The Selected Works of T.S. Spivet
+  author: Reif Larsen
+  year: 2009
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - footnote-maze
+    - typographic
+  summary: >-
+    Maps, diagrams, and side notes fill the margins, linked to the main text
+    by drawn lines; the reader keeps leaving the story to follow them.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/6065179-the-selected-works-of-t-s-spivet
+  verified: false
+
+- id: unlanguage
+  title: Unlanguage
+  author: Michael Cisco
+  year: 2018
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - lexicon
+  summary: >-
+    Written as a course in a strange language, with lessons and exercises; the
+    story of a suicide survivor emerges as the reader works through them.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/39689572-unlanguage
+  verified: false
+
+- id: oryx-and-crake
+  title: Oryx and Crake
+  author: Margaret Atwood
+  year: 2003
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - multiple-paths
+  summary: >-
+    Alternates between a post-apocalyptic present and the past that led to it.
+    Read in order; no mechanic in this list’s vocabulary really fits.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/46756.Oryx_and_Crake
+  verified: false
+
+- id: the-quincunx
+  title: The Quincunx
+  author: Charles Palliser
+  year: 1989
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - footnote-maze
+  summary: >-
+    A Victorian inheritance mystery built on a five-part pattern, with
+    genealogical tables the reader consults to untangle who is related to
+    whom. Read in order.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/824986.The_Quincunx
+  verified: false
+
+- id: landscape-painted-with-tea
+  title: Landscape Painted with Tea
+  author: Milorad Pavić
+  year: 1988
+  original_language: Serbian
+  medium: print
+  needs_physical: false
+  mechanics:
+    - multiple-paths
+  summary: >-
+    Subtitled a novel for crossword lovers: chapters are labeled Across and
+    Down, and the reader can read straight through or follow the crossword’s
+    directions.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/223313.Landscape_Painted_with_Tea
+  verified: false
+
+- id: voices-the-final-hours-of-joan-of-arc
+  title: "Voices: The Final Hours of Joan of Arc"
+  author: David Elliott
+  year: 2019
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Joan of Arc’s story told by people and objects around her in medieval
+    verse forms, with some poems shaped like their speakers on the page.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/41042549-voices
+  verified: false
+
+- id: xx
+  title: XX
+  author: Rian Hughes
+  year: 2020
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A novel about a signal from deep space, built from documents, transcripts,
+    and pages where typeface and layout carry the story.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/51075314-xx
+  verified: false
+
+- id: chasing-homer
+  title: Chasing Homer
+  author: László Krasznahorkai
+  year: 2019
+  original_language: Hungarian
+  medium: hybrid
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Each chapter pairs with a painting and a recorded drum track meant to be
+    heard while reading, so the pace of reading is set by music outside the
+    book.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/56760359-chasing-homer
+  verified: false
+
+- id: ada-or-ardor
+  title: Ada, or Ardor
+  author: Vladimir Nabokov
+  year: 1969
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - footnote-maze
+  summary: >-
+    Ends with notes by an anagrammatic editor, Vivian Darkbloom; the reader
+    moves between the text and notes to catch the novel’s multilingual puns
+    and references.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/10385073-ada-or-ardor
+  verified: false
+
+- id: infinite-jest
+  title: Infinite Jest
+  author: David Foster Wallace
+  year: 1996
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - footnote-maze
+  summary: >-
+    Hundreds of endnotes, some with their own notes, carry essential plot;
+    readers famously keep two bookmarks and flip back and forth.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/6759.Infinite_Jest
+  verified: false
+
+- id: horrorstor
+  title: Horrorstör
+  author: Grady Hendrix
+  year: 2014
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - typographic
+  summary: >-
+    Designed as a flat-pack furniture store catalog, with product pages that
+    grow more sinister chapter by chapter.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/13129925-horrorst-r
+  verified: false
+
+- id: dhalgren
+  title: Dhalgren
+  author: Samuel R. Delany
+  year: 1975
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Ends mid-sentence with words that complete the first line, making the
+    novel a loop; the final chapter splits into parallel columns of a notebook
+    the reader must interleave.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/40963358-dhalgren
+  verified: false
+
+- id: nox
+  title: Nox
+  author: Anne Carson
+  year: 2010
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - physical-intervention
+    - lexicon
+  summary: >-
+    A single accordion-folded sheet in a box, reproducing an elegy scrapbook;
+    dictionary entries for each word of a Latin poem run alongside photographs
+    and fragments.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/7428663-nox
+  verified: false
+
+- id: unflattening
+  title: Unflattening
+  author: Nick Sousanis
+  year: 2015
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A doctoral dissertation drawn as comics, where panel layout carries the
+    argument. Read in order.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/23503006-unflattening
+  verified: false
+
+- id: nibiru
+  title: Nibiru
+  author: Karl Tenbro
+  year: 2019
+  original_language: Italian
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A hallucinatory noir with reversed sentences, shifting case, children’s
+    drawings, and reproduced paintings set into the text.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/53473063-nibiru
+  verified: false
+
+- id: twelve-blue
+  title: Twelve Blue
+  author: Michael Joyce
+  year: 1996
+  original_language: English
+  medium: digital
+  needs_physical: false
+  mechanics:
+    - hypertext
+  summary: >-
+    A web hypertext of twelve story threads; links in the text disappear once
+    followed, and the reader weaves between threads shown as colored lines.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/21483918-twelve-blue
+  verified: false
+
+- id: viljevo
+  title: Viljevo (August After Midnight)
+  author: Luka Bekavac
+  year: 2013
+  original_language: Croatian
+  medium: print
+  needs_physical: false
+  mechanics:
+    - footnote-maze
+    - typographic
+  summary: >-
+    Three parts: a transcript of a damaged tape, records of otherworldly radio
+    transmissions, and a mock scholarly article with footnotes; the reader
+    assembles one story across them.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/50741805-titkos-r-s
+  verified: false
+
+- id: the-wind-up-bird-chronicle
+  title: The Wind-Up Bird Chronicle
+  author: Haruki Murakami
+  year: 1994
+  original_language: Japanese
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A novel that folds in letters, war stories, and computer chat transcripts.
+    Read in order; no mechanic in this list’s vocabulary really fits.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/11275.The_Wind_Up_Bird_Chronicle
+  verified: false
+
+- id: the-tunnel
+  title: The Tunnel
+  author: William H. Gass
+  year: 1995
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A historian’s digressive confession, broken up by cartoons, shaped text,
+    and shifting typefaces that the reader has to parse as part of the story.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/156182.The_Tunnel
+  verified: false
+
+- id: the-researchers-first-murder
+  title: The Researcher's First Murder
+  author: John Finnemore
+  year: 2024
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - reader-assembled
+  summary: >-
+    A new puzzle in the style of Cain’s Jawbone: the pages are out of order,
+    and the reader must reorder them to solve the case.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/204190428-the-researcher-s-first-murder
+  verified: false
+
+- id: the-scrapbook-of-frankie-pratt
+  title: The Scrapbook of Frankie Pratt
+  author: Caroline Preston
+  year: 2011
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A novel told entirely as a 1920s scrapbook of vintage ephemera with
+    typewritten captions; the reader pieces the story together from the
+    collage.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/34121878-the-scrapbook-of-frankie-pratt
+  verified: false
+
+- id: scorch-atlas
+  title: Scorch Atlas
+  author: Blake Butler
+  year: 2009
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - typographic
+  summary: >-
+    Stories of strange apocalypses in a book printed to look water-stained and
+    decaying, with pages of grids, lists, and blacked-out text.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/6260741-scorch-atlas
+  verified: false
+
+- id: parabola
+  title: Parabola
+  author: Lily Hoang
+  year: 2008
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Moves along the curve of a parabola, mixing stories with mathematical
+    formulas and photographs that the reader must read as part of the
+    narrative.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/4271380-parabola
+  verified: false
+
+- id: double-or-nothing
+  title: Double or Nothing
+  author: Raymond Federman
+  year: 1971
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Every page is typographically arranged, with words in columns, shapes, and
+    patterns; the reader has to work out the reading path on each page.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/266756.Double_or_Nothing
+  verified: false
+
+- id: if-nicholas-bourbaki
+  title: If
+  author: Nicholas Bourbaki
+  year: 2014
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - gamebook
+  summary: >-
+    The reader is the second-person protagonist and makes a decision at the
+    end of each chapter, steering toward one of twenty-two endings.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/20729790-if
+  verified: false
+
+- id: betrayals
+  title: Betrayals
+  author: Charles Palliser
+  year: 1994
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Linked pieces in different forms (an obituary, a review, letters, a
+    crossword); the reader assembles a hidden conspiracy from connections
+    between them.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/774216.Betrayals
+  verified: false
+
+- id: milo-and-the-magical-stones
+  title: Milo and the Magical Stones
+  author: Marcus Pfister
+  year: 1997
+  original_language: German
+  medium: print
+  needs_physical: true
+  mechanics:
+    - multiple-paths
+    - physical-intervention
+  summary: >-
+    Halfway through, the pages split horizontally into two stacks, one with a
+    happy ending and one with a sad ending, and the reader chooses which to
+    follow.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/1125388.Milo_and_the_Magical_Stones
+  verified: false
+
+- id: subcutanean
+  title: Subcutanean
+  author: Aaron A. Reed
+  year: 2020
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - permutational
+  summary: >-
+    Generated so that every printed copy is different; each reader gets their
+    own version of the story.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/52691223-subcutanean
+  verified: false
+
+- id: drift
+  title: Drift
+  author: Caroline Bergvall
+  year: 2014
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    A sequence based on the Old English poem The Seafarer, where spelling,
+    letterforms, and spacing break down and drift across the page.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/18991157-drift
+  verified: false
+
+- id: extremely-loud-and-incredibly-close
+  title: Extremely Loud & Incredibly Close
+  author: Jonathan Safran Foer
+  year: 2005
+  original_language: English
+  medium: print
+  needs_physical: true
+  mechanics:
+    - typographic
+  summary: >-
+    Photographs, blank pages, red-circled corrections, and overprinted pages
+    interrupt the text, ending with a flip-book the reader runs backward
+    through.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/4588.Extremely_Loud_Incredibly_Close
+  verified: false
+
+- id: the-paradox-paradox
+  title: The Paradox Paradox
+  author: Daniel Hardcastle
+  year: 2025
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - gamebook
+  summary: >-
+    A choose-your-path adventure for adults: numbered sections and choices,
+    with time paradoxes that loop the reader back on themselves.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/49478269-the-paradox-paradox
+  verified: false
+
+- id: the-supernatural-enhancements
+  title: The Supernatural Enhancements
+  author: Edgar Cantero
+  year: 2014
+  original_language: English
+  medium: print
+  needs_physical: false
+  mechanics:
+    - typographic
+  summary: >-
+    Told through diaries, letters, transcripts, and diagrams, with a cipher
+    puzzle the reader can try to solve alongside the characters. Read in
+    order.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/18782854-the-supernatural-enhancements
+  verified: false
+
+- id: tristano
+  title: Tristano
+  author: Nanni Balestrini
+  year: 1966
+  original_language: Italian
+  medium: print
+  needs_physical: false
+  mechanics:
+    - permutational
+  summary: >-
+    Paragraphs were shuffled by computer so that every printed copy has a
+    different arrangement; each reader holds a unique version.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/17884094-tristano
+  verified: false
+
+- id: pry
+  title: Pry
+  author: Samantha Gorman & Danny Cannizzaro
+  year: 2014
+  original_language: English
+  medium: digital
+  needs_physical: false
+  mechanics:
+    - hypertext
+  summary: >-
+    A touchscreen novella: the reader pinches a character’s eyes open to see
+    the world, or pries apart lines of text to reach his buried thoughts.
+  links:
+    - label: Goodreads
+      url: https://www.goodreads.com/book/show/26092711-pry
+  verified: false

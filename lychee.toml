@@ -1,0 +1,13 @@
+# Link checker settings, used by .github/workflows/check.yml.
+
+# Some sites (Cloudflare-protected ones, JHU Press, Reddit) answer automated
+# requests with 403 or 429 even when the page exists. Treat those as "up";
+# 404s and dead domains still fail. Check those sites by hand when verifying.
+accept = ["200..=299", "403", "429"]
+
+# The site's own pages don't exist until the first deploy.
+exclude = ["^https://rrbaker\\.github\\.io/awesome-ergodic-lit"]
+
+max_retries = 3
+timeout = 30
+user_agent = "Mozilla/5.0 (compatible; awesome-ergodic-lit link check)"

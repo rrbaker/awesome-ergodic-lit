@@ -1,0 +1,20 @@
+<footer class="mx-auto max-w-3xl px-6 pb-16">
+  <p class="ornament" aria-hidden="true">⁂</p>
+  <div class="space-y-2 text-center text-sm text-ink-soft">
+    <p>
+      Compiled by <a href="https://rrbaker.com">Rob Baker</a>.
+      Last updated <time datetime="{{ site.last_updated | date_to_xmlschema }}">{{ site.last_updated | date: "%-d %B %Y" }}</time>.
+    </p>
+    <p>A reading list of books that ask something of the reader. Free to reuse for any purpose (<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>).</p>
+    <p>
+      {%- comment -%} Without JavaScript, this falls back to the About page's suggestion section. {%- endcomment %}
+      <a href="{{ '/about/#suggest' | relative_url }}" data-email data-subject="Ergodic literature suggestion">Suggest a book</a>
+      <span aria-hidden="true">·</span>
+      <a href="{{ '/about/#download' | relative_url }}">Download the list</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://github.com/{{ site.repository }}">Source code</a>
+      <span aria-hidden="true">·</span>
+      No analytics, no cookies
+    </p>
+  </div>
+</footer>

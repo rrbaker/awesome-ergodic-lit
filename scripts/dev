@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Local development: rebuilds CSS on template changes and serves the site.
+#
+#   http://ergodic.test      via Laravel Herd (one-time setup:
+#                            herd proxy ergodic http://127.0.0.1:4000)
+#   http://localhost:4000    direct, without Herd
+#
+# Both live-reload the browser on save. Keep the Herd proxy on plain HTTP:
+# Jekyll's live reload doesn't work over HTTPS.
+# The site is served from the root here; GitHub Pages builds set their own
+# base path (/awesome-ergodic-lit) in .github/workflows/pages.yml.
+# Stop with Ctrl+C.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+scripts/tailwind # build once so Jekyll has CSS to copy on startup
+scripts/tailwind --watch=always &
+trap 'kill $!' EXIT
+bundle exec jekyll serve --host 127.0.0.1 --baseurl "" --livereload

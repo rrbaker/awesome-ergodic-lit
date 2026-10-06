@@ -1,0 +1,31 @@
+# Jekyll site configuration.
+# Jekyll reads this once at startup; restart `jekyll serve` after editing it.
+
+title: Awesome Ergodic Literature
+description: >-
+  A curated list of ergodic literature (texts that take nontrivial effort to
+  traverse), structured by reading mechanics.
+
+# Where the site lives. `url` + `baseurl` form the full address:
+# https://rrbaker.github.io/awesome-ergodic-lit
+# In CI, baseurl is overridden with the value GitHub Pages reports.
+# scripts/build-readme also reads these to build links in README.md.
+url: https://rrbaker.github.io
+baseurl: /awesome-ergodic-lit
+
+repository: rrbaker/awesome-ergodic-lit
+
+# Files Jekyll should not copy into the built site.
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - VERIFICATION.md
+  - LICENSE
+  - LICENSE-CODE
+  - Gemfile
+  - Gemfile.lock
+  - lychee.toml
+  - scripts/
+  - assets/css/input.css
+  - vendor/
+  - .bin/

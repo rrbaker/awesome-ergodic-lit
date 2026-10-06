@@ -1,0 +1,20 @@
+# Jekyll build output and caches
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Bundler
+vendor/
+.bundle/
+
+# Compiled Tailwind output (built by scripts/tailwind, locally and in CI)
+assets/css/site.css
+
+# Downloaded Tailwind standalone CLI
+.bin/
+
+.DS_Store
+
+# Local editor/agent settings
+.claude/

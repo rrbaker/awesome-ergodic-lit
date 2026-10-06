@@ -1,0 +1,59 @@
+# Builds the site and publishes it to GitHub Pages on every push to main.
+#
+# Two jobs: `build` compiles the CSS and runs Jekyll, then uploads the
+# finished _site folder; `deploy` hands that upload to GitHub Pages.
+# Requires Settings → Pages → Source: "GitHub Actions".
+
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # adds a "Run workflow" button in the Actions tab
+
+permissions:
+  contents: read
+  pages: write # publish to Pages
+  id-token: write # prove to Pages that this workflow is allowed to deploy
+
+# Never run two deploys at once; let an in-progress deploy finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Installs the Ruby version in .ruby-version and the gems in Gemfile.lock,
+      # caching them between runs.
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      # Reports the site's base path (/awesome-ergodic-lit) so links
+      # stay correct even if the repo is renamed or a custom domain is added.
+      - id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Build CSS
+        run: scripts/tailwind --minify
+
+      - name: Build site
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - uses: actions/upload-pages-artifact@v5
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

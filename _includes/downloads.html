@@ -1,0 +1,9 @@
+{%- comment -%}
+  Links to the generated downloads in downloads/. The `download` attribute
+  makes the browser save the file instead of opening it.
+{%- endcomment -%}
+<ul>
+  <li><a href="{{ '/ergodic-literature.txt' | relative_url }}" download>Text file</a>: titles and authors</li>
+  <li><a href="{{ '/ergodic-literature.md' | relative_url }}" download>Markdown file</a>: titles and authors, formatted</li>
+  <li><a href="{{ '/ergodic-literature.csv' | relative_url }}" download>Spreadsheet</a> (CSV, opens in Excel, Numbers, or Google Sheets): title, author, year, description, and ways of reading</li>
+</ul>

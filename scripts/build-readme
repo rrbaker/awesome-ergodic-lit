@@ -1,0 +1,193 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# scripts/build-readme
+#
+# Rebuilds the generated parts of README.md (and the mechanics table in
+# CONTRIBUTING.md) from the YAML files in _data/.
+#
+#   scripts/build-readme          update the files in place
+#   scripts/build-readme --check  change nothing; exit with an error if the
+#                                 files are out of date (CI runs this)
+#
+# How it works: each generated region sits between a pair of HTML comments,
+# such as <!-- works:start --> and <!-- works:end -->. GitHub doesn't display
+# comments, so they work as invisible markers. The script replaces whatever is
+# between each pair with freshly generated Markdown and leaves everything else
+# alone. Before writing anything it validates the data, so a typo (an unknown
+# mechanic, a duplicate id) fails loudly instead of slipping through.
+#
+# Uses only Ruby's standard library, so it runs without `bundle install`.
+
+require "yaml"
+
+# Read and write files as UTF-8 regardless of the machine's locale settings.
+Encoding.default_external = Encoding::UTF_8
+
+ROOT = File.expand_path("..", __dir__)
+
+def load_yaml(path)
+  YAML.safe_load(File.read(File.join(ROOT, path)))
+end
+
+CONFIG = load_yaml("_config.yml")
+SITE_URL = "#{CONFIG.fetch("url")}#{CONFIG.fetch("baseurl", "")}"
+
+MECHANICS = load_yaml("_data/mechanics.yml")
+WORKS = load_yaml("_data/works.yml")
+RESOURCES = load_yaml("_data/resources.yml")
+
+MECHANIC_LABELS = MECHANICS.to_h { |m| [m["id"], m["label"]] }
+MEDIUMS = %w[print digital hybrid].freeze
+CATEGORIES = %w[database scholarship community list foundational].freeze
+
+# README headings for resources, in order, and the categories each one holds.
+RESOURCE_SECTIONS = {
+  "Databases & Directories" => %w[database],
+  "Scholarship" => %w[foundational scholarship],
+  "Communities" => %w[community list],
+}.freeze
+
+# --- Validation --------------------------------------------------------------
+
+def validate!
+  errors = []
+
+  seen = {}
+  WORKS.each_with_index do |w, i|
+    name = w["id"] || "work ##{i + 1}"
+    missing = %w[id title author year original_language medium needs_physical
+                 mechanics summary verified].reject { |k| w.key?(k) }
+    errors << "#{name}: missing #{missing.join(", ")}" if missing.any?
+
+    id = w["id"]
+    unless id.is_a?(String) && id.match?(/\A[a-z0-9]+(-[a-z0-9]+)*\z/)
+      errors << "#{name}: id must be kebab-case text (quote it if it's all digits)"
+    end
+    errors << "#{name}: duplicate id" if seen[id]
+    seen[id] = true
+
+    errors << "#{name}: year must be a number" unless w["year"].is_a?(Integer)
+    errors << "#{name}: medium must be one of #{MEDIUMS.join(", ")}" unless MEDIUMS.include?(w["medium"])
+    %w[needs_physical verified].each do |k|
+      errors << "#{name}: #{k} must be true or false" unless [true, false].include?(w[k])
+    end
+
+    mechanics = Array(w["mechanics"])
+    errors << "#{name}: needs at least one mechanic" if mechanics.empty?
+    (mechanics - MECHANIC_LABELS.keys).each do |m|
+      errors << "#{name}: unknown mechanic '#{m}' (see _data/mechanics.yml)"
+    end
+
+    Array(w["links"]).each do |link|
+      errors << "#{name}: every link needs a label and a url" unless link["label"] && link["url"]
+    end
+  end
+
+  RESOURCES.each_with_index do |r, i|
+    name = r["name"] || "resource ##{i + 1}"
+    missing = %w[name category url description verified].reject { |k| r.key?(k) }
+    errors << "#{name}: missing #{missing.join(", ")}" if missing.any?
+    errors << "#{name}: category must be one of #{CATEGORIES.join(", ")}" unless CATEGORIES.include?(r["category"])
+  end
+
+  return if errors.empty?
+
+  warn "Data errors:\n" + errors.map { |e| "  - #{e}" }.join("\n")
+  exit 1
+end
+
+# --- Markdown builders -------------------------------------------------------
+
+# Matches the anchor GitHub generates for a heading.
+def slug(heading)
+  heading.downcase.gsub(/[^\p{Word}\- ]/u, "").tr(" ", "-")
+end
+
+# Collapses whitespace and makes sure the text ends with a period.
+def sentence(text)
+  text = text.to_s.split.join(" ")
+  text.end_with?(".") ? text : "#{text}."
+end
+
+# Each work is listed once, under its first (dominant) mechanic. Listing it
+# under every mechanic would repeat links, which awesome-lint rejects.
+def works_by_mechanic
+  MECHANICS.filter_map do |m|
+    works = WORKS.select { |w| w["mechanics"].first == m["id"] }
+    [m, works.sort_by { |w| w["title"].downcase }] if works.any?
+  end
+end
+
+def resources_by_section
+  RESOURCE_SECTIONS.filter_map do |heading, categories|
+    items = categories.flat_map { |c| RESOURCES.select { |r| r["category"] == c } }
+    [heading, items] if items.any?
+  end
+end
+
+def toc
+  lines = ["- [Introduction](#introduction)", "- [Works](#works)"]
+  works_by_mechanic.each { |m, _| lines << "  - [#{m["label"]}](##{slug(m["label"])})" }
+  resources_by_section.each { |heading, _| lines << "- [#{heading}](##{slug(heading)})" }
+  lines.join("\n")
+end
+
+def works_section
+  works_by_mechanic.map do |m, works|
+    items = works.map do |w|
+      desc = "#{w["author"]}, #{w["year"]}. #{sentence(w["summary"])}"
+      also = w["mechanics"].drop(1).map { |id| MECHANIC_LABELS[id].downcase }
+      desc += " Also: #{also.join(", ")}." if also.any?
+      "- [#{w["title"]}](#{SITE_URL}/works/#{w["id"]}/) - #{desc}"
+    end
+    "### #{m["label"]}\n\n#{m["description"]}\n\n#{items.join("\n")}"
+  end.join("\n\n")
+end
+
+def resources_section
+  resources_by_section.map do |heading, items|
+    lines = items.map { |r| "- [#{r["name"]}](#{r["url"]}) - #{sentence(r["description"])}" }
+    "## #{heading}\n\n#{lines.join("\n")}"
+  end.join("\n\n")
+end
+
+def mechanics_table
+  rows = MECHANICS.map { |m| "| `#{m["id"]}` | #{m["description"]} |" }
+  ["| Mechanic | Use when |", "| --- | --- |", *rows].join("\n")
+end
+
+# --- Writing -----------------------------------------------------------------
+
+def fill(text, name, content, file)
+  pattern = /(<!-- #{name}:start -->).*?(<!-- #{name}:end -->)/m
+  abort "#{file}: missing <!-- #{name}:start --> / <!-- #{name}:end --> markers" unless text.match?(pattern)
+  text.sub(pattern) { "#{Regexp.last_match(1)}\n\n#{content}\n\n#{Regexp.last_match(2)}" }
+end
+
+validate!
+
+targets = {
+  "README.md" => { "toc" => toc, "works" => works_section, "resources" => resources_section },
+  "CONTRIBUTING.md" => { "mechanics" => mechanics_table },
+}
+
+check = ARGV.include?("--check")
+stale = []
+
+targets.each do |file, regions|
+  path = File.join(ROOT, file)
+  before = File.read(path)
+  after = regions.reduce(before) { |text, (name, content)| fill(text, name, content, file) }
+  next if after == before
+
+  stale << file
+  File.write(path, after) unless check
+end
+
+if check && stale.any?
+  warn "Out of date: #{stale.join(", ")}. Run scripts/build-readme and commit the result."
+  exit 1
+end
+
+puts stale.any? ? "Updated #{stale.join(", ")}." : "Already up to date."

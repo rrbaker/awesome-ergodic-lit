@@ -1,0 +1,63 @@
+# External resources: databases, scholarship, communities, and other lists.
+# category: database | scholarship | community | list | foundational
+# Run scripts/build-readme after editing.
+
+- name: "Cybertext: Perspectives on Ergodic Literature"
+  category: foundational
+  url: https://archive.org/details/cybertextperspec0000aars/mode/2up
+  description: >-
+    Espen J. Aarseth’s 1997 book, which introduced the term ergodic
+    literature.
+  verified: false
+
+- name: Electronic Literature Directory
+  category: database
+  url: https://directory.eliterature.org/
+  description: >-
+    The Electronic Literature Organization’s catalog of works, authors, and
+    publishers; digital-leaning.
+  verified: true
+
+- name: ELO Glossary
+  category: database
+  url: https://directory.eliterature.org/glossary
+  description: >-
+    Definitions of terms including ergodic, hypertext, bookishness, and
+    database narrative.
+  verified: true
+
+- name: ELMCIP Knowledge Base
+  category: database
+  url: https://elmcip.net/knowledgebase
+  description: >-
+    University of Bergen research database of electronic literature.
+  verified: false
+
+- name: Cybertext Yearbook database
+  category: scholarship
+  url: http://cybertext.hum.jyu.fi/
+  description: >-
+    Free online edition of the Cybertext Yearbooks; the 2006 volume, Ergodic
+    Histories, covers non-Anglophone and proto-hypertext examples.
+  verified: false
+
+- name: "Goodreads: ergodic-literature shelf"
+  category: list
+  url: https://www.goodreads.com/shelf/show/ergodic-literature
+  description: >-
+    Books Goodreads users have tagged as ergodic literature.
+  verified: true
+
+- name: "Goodreads: Ergodic Literature list"
+  category: list
+  url: https://www.goodreads.com/list/show/90232.Ergodic_Literature
+  description: >-
+    User-voted list of about 70 books.
+  verified: false
+
+- name: "Pagebound: Ergodic Literature"
+  category: list
+  url: https://pagebound.co/lists/6458443a-ed73-4a30-92e3-0e4ee3362f95
+  description: >-
+    User-curated list; comments note which books need a physical copy.
+  verified: true

@@ -1,0 +1,43 @@
+---
+layout: default
+title: Ways of reading
+permalink: /mechanics/
+description: The reading mechanics used to describe every work on the list, with examples.
+---
+{%- assign works = site.data.works | sort_natural: "title" -%}
+
+<header>
+  <p class="label">A field guide</p>
+  <h1 class="mt-4 text-4xl font-light tracking-tight sm:text-6xl">Ways of reading</h1>
+  <p class="mt-10 max-w-prose text-xl leading-relaxed">
+    Every book on the list is described by what it asks you to do. A single book can do several of these at once.
+  </p>
+</header>
+
+<nav aria-label="On this page" class="mt-12">
+  <ul class="flex flex-wrap gap-x-5 gap-y-1">
+    {%- for m in site.data.mechanics %}
+    <li><a href="#{{ m.id }}" class="label quiet-link text-ink-soft">{{ m.label }}</a></li>
+    {%- endfor %}
+  </ul>
+</nav>
+
+<div class="mt-16 border-b border-rule">
+  {%- for m in site.data.mechanics %}
+  {%- assign examples = works | where_exp: "w", "w.mechanics contains m.id" %}
+  <section id="{{ m.id }}" aria-labelledby="{{ m.id }}-heading" class="scroll-mt-8 border-t border-rule py-12">
+    <h2 id="{{ m.id }}-heading" class="text-3xl font-light">{{ m.label }}</h2>
+    <p class="mt-3 max-w-prose text-xl text-ink-soft">{{ m.description }}</p>
+    {%- if examples.size > 0 %}
+    <ul class="mt-6 space-y-2">
+      {%- for w in examples %}
+      <li><a href="{{ '/works/' | append: w.id | append: '/' | relative_url }}">{{ w.title }}</a> <span class="italic text-ink-soft">{{ w.author }}, {{ w.year }}</span></li>
+      {%- endfor %}
+    </ul>
+    <p class="mt-6 text-base"><a href="{{ '/' | relative_url }}?mechanic={{ m.id }}">Show only these in the list</a></p>
+    {%- else %}
+    <p class="mt-6 italic text-ink-soft">Nothing listed yet. <a href="{{ '/about/#suggest' | relative_url }}" class="not-italic">Suggest a book</a>.</p>
+    {%- endif %}
+  </section>
+  {%- endfor %}
+</div>

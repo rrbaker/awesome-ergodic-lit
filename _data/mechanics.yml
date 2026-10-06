@@ -1,0 +1,46 @@
+# Controlled vocabulary for the `mechanics` field in works.yml.
+# Extend deliberately: add a new mechanic only when an existing one can't
+# describe what the reader has to do. Order here is the order used on the
+# site and in README.md.
+#
+# When you change this list, run scripts/build-readme.
+
+- id: footnote-maze
+  label: Footnote maze
+  description: The reading path splits across notes, appendices, and apparatus.
+
+- id: multiple-paths
+  label: Multiple paths
+  description: Author-defined alternate orders or reading routes.
+
+- id: reader-assembled
+  label: Reader-assembled
+  description: Loose-leaf, boxed, shuffleable, or unbound.
+
+- id: permutational
+  label: Permutational
+  description: Combinatorial text, such as cut strips or generated combinations.
+
+- id: lexicon
+  label: Lexicon
+  description: Dictionary or encyclopedia structure, read in any order.
+
+- id: typographic
+  label: Typographic
+  description: Layout, rotation, color, or spacing is part of the traversal.
+
+- id: physical-intervention
+  label: Physical intervention
+  description: Die-cut pages, inserts, objects, or ephemera.
+
+- id: gamebook
+  label: Gamebook
+  description: Branching choices with explicit instructions to the reader.
+
+- id: hypertext
+  label: Hypertext
+  description: Linked nodes, digital or simulated in print.
+
+- id: annotated-dialogue
+  label: Annotated dialogue
+  description: Multiple readers' annotations form a parallel narrative.

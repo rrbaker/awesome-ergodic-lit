@@ -1,0 +1,39 @@
+---
+layout: default
+title: Resources
+permalink: /resources/
+description: Databases, scholarship, communities, and other lists about ergodic literature.
+---
+{%- comment -%}
+  Each item is "category:Heading". `split` breaks the string into a list,
+  then each item is split again on ":" to get the id and the display name.
+{%- endcomment -%}
+{%- assign categories = "foundational:Where the term comes from,database:Databases and directories,scholarship:Scholarship,community:Communities,list:Other reading lists" | split: "," -%}
+
+<header>
+  <p class="label">Further afield</p>
+  <h1 class="mt-4 text-4xl font-light tracking-tight sm:text-6xl">Resources</h1>
+  <p class="mt-10 max-w-prose text-xl leading-relaxed">
+    Where else to look, from the book that named the idea to databases and communities of readers.
+  </p>
+</header>
+
+<div class="mt-16 border-b border-rule">
+  {%- for category in categories %}
+  {%- assign parts = category | split: ":" %}
+  {%- assign items = site.data.resources | where: "category", parts[0] %}
+  {%- if items.size > 0 %}
+  <section aria-labelledby="{{ parts[0] }}" class="border-t border-rule py-12">
+    <h2 id="{{ parts[0] }}" class="label">{{ parts[1] }}</h2>
+    <ul class="mt-6 space-y-8">
+      {%- for r in items %}
+      <li>
+        <a href="{{ r.url }}" class="text-xl">{{ r.name }}</a>
+        <p class="mt-1 max-w-prose text-ink-soft">{{ r.description }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+  {%- endfor %}
+</div>

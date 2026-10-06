@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Compiles assets/css/input.css to assets/css/site.css with the Tailwind
+# standalone CLI: a single downloaded program, so no Node or npm needed.
+#
+#   scripts/tailwind            build once
+#   scripts/tailwind --watch    rebuild on every template change
+#   scripts/tailwind --minify   smaller output (used in CI)
+#
+# The CLI is downloaded on first run into .bin/ (ignored by git). Change
+# VERSION here to upgrade; CI and local builds both use this script.
+set -euo pipefail
+
+VERSION="v4.3.3"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+BIN="$ROOT/.bin/tailwindcss-$VERSION"
+
+if [ ! -x "$BIN" ]; then
+  case "$(uname -s)-$(uname -m)" in
+    Darwin-arm64) asset=tailwindcss-macos-arm64 ;;
+    Darwin-x86_64) asset=tailwindcss-macos-x64 ;;
+    Linux-x86_64) asset=tailwindcss-linux-x64 ;;
+    Linux-aarch64 | Linux-arm64) asset=tailwindcss-linux-arm64 ;;
+    *) echo "No Tailwind CLI build for $(uname -s)-$(uname -m)" >&2; exit 1 ;;
+  esac
+  echo "Downloading Tailwind CLI $VERSION…" >&2
+  mkdir -p "$ROOT/.bin"
+  curl -fsSL -o "$BIN" "https://github.com/tailwindlabs/tailwindcss/releases/download/$VERSION/$asset"
+  chmod +x "$BIN"
+fi
+
+exec "$BIN" -i "$ROOT/assets/css/input.css" -o "$ROOT/assets/css/site.css" "$@"

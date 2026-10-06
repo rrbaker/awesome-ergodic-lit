@@ -1,0 +1,156 @@
+---
+layout: default
+title: The list
+alpine: true
+---
+{%- comment -%}
+  Liquid primer: double curly braces print a value; curly-brace-percent tags
+  are logic (loops, ifs, assigning variables). `site.data.works` is
+  _data/works.yml, already parsed.
+  Here we collect the distinct decades and languages for the filter dropdowns.
+{%- endcomment -%}
+{%- assign works = site.data.works | sort_natural: "title" -%}
+{%- assign decades = "" | split: "" -%}
+{%- for work in works -%}
+  {%- assign decade = work.year | divided_by: 10 | times: 10 -%}
+  {%- assign decades = decades | push: decade -%}
+{%- endfor -%}
+{%- assign decades = decades | uniq | sort -%}
+{%- assign languages = works | map: "original_language" | uniq | sort -%}
+
+<section aria-labelledby="intro-heading">
+  <h1 id="intro-heading" class="sr-only">Ergodic literature</h1>
+  <div class="max-w-prose space-y-6 text-xl leading-relaxed">
+    <p>
+      Some books can’t simply be read front to back. You chase footnotes into other footnotes,
+      shuffle loose pages, turn the book upside down, or choose your own route through it.
+      The scholar Espen J. Aarseth called this <a href="{{ '/about/' | relative_url }}">ergodic literature</a>.
+    </p>
+  </div>
+  <figure class="mt-12 max-w-prose border-l border-rule pl-6">
+    <blockquote class="text-xl italic leading-relaxed text-ink-soft">
+      <p>“…nontrivial effort is required to allow the reader to traverse the text.”</p>
+    </blockquote>
+    <figcaption class="label mt-3">Espen J. Aarseth, <cite><a href="https://archive.org/details/cybertextperspec0000aars/mode/2up">Cybertext</a></cite>, 1997</figcaption>
+  </figure>
+  <p class="mt-12 text-base text-ink-soft">
+    New here? Start with <a href="{{ '/mechanics/' | relative_url }}">the ways of reading</a>,
+    or <a href="{{ '/about/' | relative_url }}">how this list works</a>.
+  </p>
+</section>
+
+<p class="ornament" aria-hidden="true">⁂</p>
+
+<section aria-labelledby="list-heading" x-data="workFilter('{{ site.baseurl }}')" x-effect="writeUrl()">
+  <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+    <h2 id="list-heading" class="text-3xl font-light">The list</h2>
+    <p class="label">
+      <span role="status" x-text="summary">{{ works.size }} works</span>
+      <button type="button" x-show="active" x-cloak @click="reset()" class="ml-3 cursor-pointer text-accent underline decoration-rule underline-offset-[0.2em] hover:decoration-accent">Clear filters</button>
+    </p>
+  </div>
+  <p class="mt-3 text-sm text-ink-soft">
+    Download the full list:
+    <a href="{{ '/ergodic-literature.txt' | relative_url }}" download>text</a>,
+    <a href="{{ '/ergodic-literature.md' | relative_url }}" download>Markdown</a>, or
+    <a href="{{ '/ergodic-literature.csv' | relative_url }}" download>spreadsheet</a>.
+  </p>
+
+  <form role="search" aria-label="Filter the list" @submit.prevent class="mt-10 space-y-10" x-cloak>
+    <div>
+      <label for="q" class="label block">Search</label>
+      <input id="q" type="search" x-model.debounce.300ms="q" placeholder="Title, author, or description"
+        class="field text-xl placeholder:text-ink-soft">
+    </div>
+
+    <div role="group" aria-labelledby="mechanics-label">
+      <p id="mechanics-label" class="label">Ways of reading</p>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {%- for m in site.data.mechanics %}
+        {%- assign count = works | where_exp: "w", "w.mechanics contains m.id" | size %}
+        {%- if count > 0 %}
+        <li>
+          <button type="button" @click="toggle('{{ m.id }}')" :aria-pressed="mechanics.includes('{{ m.id }}') ? 'true' : 'false'"
+            class="cursor-pointer rounded-full border border-control px-4 py-1 text-base transition-colors hover:border-accent aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-paper">
+            {{ m.label }}
+          </button>
+        </li>
+        {%- endif %}
+        {%- endfor %}
+      </ul>
+      <p class="mt-3 text-sm text-ink-soft">Choose any number. <a href="{{ '/mechanics/' | relative_url }}">What do these mean?</a></p>
+    </div>
+
+    <details x-init="$el.open = Boolean(medium || physical || decade || language)" class="group">
+      <summary class="label cursor-pointer marker:text-control">More filters</summary>
+      <div class="mt-6 grid gap-8 sm:grid-cols-2">
+        <div>
+          <label for="medium" class="label block">Medium</label>
+          <select id="medium" x-model="medium" class="field bg-paper">
+            <option value="">Any</option>
+            <option value="print">Print</option>
+            <option value="digital">Digital</option>
+            <option value="hybrid">Hybrid (print and digital)</option>
+          </select>
+        </div>
+        <div>
+          <label for="physical" class="label block">Needs the physical object</label>
+          <select id="physical" x-model="physical" class="field bg-paper">
+            <option value="">Either</option>
+            <option value="yes">Yes, an ebook would lose the effect</option>
+            <option value="no">No, any edition works</option>
+          </select>
+        </div>
+        <div>
+          <label for="decade" class="label block">Decade</label>
+          <select id="decade" x-model="decade" class="field bg-paper">
+            <option value="">Any</option>
+            {%- for d in decades %}
+            <option value="{{ d }}">{{ d }}s</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="language" class="label block">Original language</label>
+          <select id="language" x-model="language" class="field bg-paper">
+            <option value="">Any</option>
+            {%- for l in languages %}
+            <option value="{{ l }}">{{ l }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+      </div>
+    </details>
+  </form>
+
+  <ul class="mt-14 border-t border-rule" x-cloak>
+    <template x-for="work in results" :key="work.id">
+      <li class="border-b border-rule py-10">
+        <p class="label" x-text="mechanicLabels(work)"></p>
+        <h3 class="mt-2 text-2xl font-normal sm:text-3xl"><a class="quiet-link" :href="workUrl(work)" x-text="work.title"></a></h3>
+        <p class="mt-1 italic text-ink-soft" x-text="`${work.author}, ${work.year}`"></p>
+        <p class="mt-4 max-w-prose" x-text="work.summary"></p>
+      </li>
+    </template>
+  </ul>
+
+  <p x-show="results.length === 0" x-cloak class="py-16 text-center italic text-ink-soft">
+    Nothing matches those filters.
+    <button type="button" @click="reset()" class="cursor-pointer not-italic text-accent underline decoration-rule underline-offset-[0.2em] hover:decoration-accent">Clear them</button>
+  </p>
+
+  <noscript>
+    <ul class="mt-10 border-t border-rule">
+      {%- for work in works %}
+      <li class="border-b border-rule py-6">
+        <a class="quiet-link text-2xl" href="{{ '/works/' | append: work.id | append: '/' | relative_url }}">{{ work.title }}</a>
+        <p class="italic text-ink-soft">{{ work.author }}, {{ work.year }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+  </noscript>
+
+  {%- comment -%} The data Alpine filters. `jsonify` turns the YAML into JSON. {%- endcomment %}
+  <script type="application/json" id="works-data">{{ works | jsonify }}</script>
+  <script type="application/json" id="mechanics-data">{{ site.data.mechanics | jsonify }}</script>
+</section>

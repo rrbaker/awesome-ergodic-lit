@@ -1,0 +1,54 @@
+# Quality checks on every pull request and push to main, plus a weekly run
+# to catch links that have broken since they were added.
+
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1" # Mondays, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  readme:
+    name: README matches data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1 # Ruby only; the script needs no gems
+      # Validates _data/*.yml and fails if README.md or CONTRIBUTING.md
+      # differ from what scripts/build-readme would generate.
+      - run: scripts/build-readme --check
+
+  awesome-lint:
+    name: awesome-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # awesome-lint inspects git history
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+      # Also checks the GitHub repo itself: it needs a description, the
+      # topics "awesome" and "awesome-list", and a detected license.
+      - run: npx --yes awesome-lint@2.3.0 README.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  links:
+    name: Links resolve
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # lychee extracts every URL from these files and requests it.
+      # Settings (accepted status codes, exclusions) are in lychee.toml.
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --config lychee.toml README.md _data/works.yml _data/resources.yml
+          fail: true

@@ -1,0 +1,73 @@
+---
+layout: default
+---
+{%- assign work = page.work -%}
+{%- assign labels = "" | split: "" -%}
+{%- for id in work.mechanics -%}
+  {%- assign m = site.data.mechanics | where: "id", id | first -%}
+  {%- assign labels = labels | push: m.label -%}
+{%- endfor -%}
+
+<article>
+  <p class="label"><a href="{{ '/' | relative_url }}" class="quiet-link text-ink-soft"><span aria-hidden="true">←</span> The list</a></p>
+
+  <header class="mt-12">
+    <p class="label">{{ labels | join: " · " }}</p>
+    <h1 class="mt-3 text-4xl font-light tracking-tight sm:text-6xl">{{ work.title }}</h1>
+    <p class="mt-4 text-xl italic text-ink-soft">{{ work.author }}, {{ work.year }}</p>
+  </header>
+
+  <p class="mt-12 max-w-prose text-xl leading-relaxed sm:text-2xl sm:leading-relaxed">{{ work.summary }}</p>
+
+  {%- unless work.verified %}
+  <p class="mt-10 max-w-prose border-l-2 border-accent pl-4 text-base text-ink-soft">
+    An editor hasn’t checked this entry yet, so some details may change.
+    <a href="{{ '/about/#verified' | relative_url }}">What this means</a>
+  </p>
+  {%- endunless %}
+
+  <p class="ornament" aria-hidden="true">⁂</p>
+
+  <section aria-labelledby="how-heading">
+    <h2 id="how-heading" class="label">How it’s read</h2>
+    <dl class="mt-6 space-y-6">
+      {%- for id in work.mechanics %}
+      {%- assign m = site.data.mechanics | where: "id", id | first %}
+      <div>
+        <dt class="text-xl"><a href="{{ '/mechanics/' | relative_url }}#{{ id }}">{{ m.label | default: id }}</a></dt>
+        <dd class="mt-1 text-ink-soft">{{ m.description }}</dd>
+      </div>
+      {%- endfor %}
+    </dl>
+  </section>
+
+  <section aria-labelledby="details-heading" class="mt-16">
+    <h2 id="details-heading" class="label">Details</h2>
+    <dl class="mt-6 grid grid-cols-1 border-t border-rule sm:grid-cols-[14rem_1fr]">
+      <dt class="pt-3 text-ink-soft sm:border-b sm:border-rule sm:pb-3">First published</dt>
+      <dd class="border-b border-rule pb-3 sm:pt-3"><a href="{{ '/' | relative_url }}?decade={{ work.year | divided_by: 10 | times: 10 }}">{{ work.year }}</a></dd>
+      <dt class="pt-3 text-ink-soft sm:border-b sm:border-rule sm:pb-3">Original language</dt>
+      <dd class="border-b border-rule pb-3 sm:pt-3"><a href="{{ '/' | relative_url }}?language={{ work.original_language | uri_escape }}">{{ work.original_language }}</a></dd>
+      <dt class="pt-3 text-ink-soft sm:border-b sm:border-rule sm:pb-3">Medium</dt>
+      <dd class="border-b border-rule pb-3 sm:pt-3"><a href="{{ '/' | relative_url }}?medium={{ work.medium }}">{{ work.medium | capitalize }}</a></dd>
+      <dt class="pt-3 text-ink-soft sm:border-b sm:border-rule sm:pb-3">Needs the physical object</dt>
+      <dd class="border-b border-rule pb-3 sm:pt-3">{% if work.needs_physical %}Yes. An ebook or audiobook would lose the effect.{% else %}No. Any edition works.{% endif %}</dd>
+    </dl>
+  </section>
+
+  {%- if work.links.size > 0 %}
+  <section aria-labelledby="links-heading" class="mt-16">
+    <h2 id="links-heading" class="label">Further reading</h2>
+    <ul class="mt-6 space-y-2">
+      {%- for link in work.links %}
+      <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+
+  <p class="mt-16 text-base text-ink-soft">
+    Spot a mistake?
+    <a href="{{ '/about/#suggest' | relative_url }}" data-email data-subject="Correction: {{ work.title | escape }}">Email a correction</a>.
+  </p>
+</article>

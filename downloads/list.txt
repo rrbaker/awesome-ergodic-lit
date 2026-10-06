@@ -1,0 +1,7 @@
+---
+# Plain-text download: one "Title by Author" per line.
+# The permalink sets the output file name; Jekyll only runs Liquid on it.
+permalink: /ergodic-literature.txt
+---
+{% assign works = site.data.works | sort_natural: "title" %}{% for w in works %}{{ w.title }} by {{ w.author }}
+{% endfor -%}

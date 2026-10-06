@@ -1,0 +1,9 @@
+---
+# Markdown download. The source ends in .txt so Jekyll doesn't convert it
+# to HTML; the permalink gives the output its .md name.
+permalink: /ergodic-literature.md
+---
+# Ergodic Literature
+
+{% assign works = site.data.works | sort_natural: "title" %}{% for w in works %}- *{{ w.title }}* by {{ w.author }}
+{% endfor -%}
