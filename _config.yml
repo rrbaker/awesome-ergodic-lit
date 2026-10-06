@@ -6,12 +6,11 @@ description: >-
   A curated list of ergodic literature (texts that take nontrivial effort to
   traverse), structured by reading mechanics.
 
-# Where the site lives. `url` + `baseurl` form the full address:
-# https://rrbaker.github.io/awesome-ergodic-lit
-# In CI, baseurl is overridden with the value GitHub Pages reports.
-# scripts/build-readme also reads these to build links in README.md.
-url: https://rrbaker.github.io
-baseurl: /awesome-ergodic-lit
+# Where the site lives: https://ergodic.rrbaker.com (a custom domain set in
+# the repo's Pages settings, so there's no sub-path and baseurl is empty).
+# Canonical links, the sitemap, and README.md links are built from these.
+url: https://ergodic.rrbaker.com
+baseurl: ""
 
 repository: rrbaker/awesome-ergodic-lit
 

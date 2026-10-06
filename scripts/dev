@@ -7,8 +7,7 @@
 #
 # Both live-reload the browser on save. Keep the Herd proxy on plain HTTP:
 # Jekyll's live reload doesn't work over HTTPS.
-# The site is served from the root here; GitHub Pages builds set their own
-# base path (/awesome-ergodic-lit) in .github/workflows/pages.yml.
+# The site is served from the root here, as it is at ergodic.rrbaker.com.
 # Stop with Ctrl+C.
 set -euo pipefail
 cd "$(dirname "$0")/.."

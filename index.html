@@ -41,7 +41,7 @@ alpine: true
 
 <p class="ornament" aria-hidden="true">⁂</p>
 
-<section aria-labelledby="list-heading" x-data="workFilter('{{ site.baseurl }}')" x-effect="writeUrl()">
+<section aria-labelledby="list-heading" x-data="workFilter" x-effect="writeUrl()">
   <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
     <h2 id="list-heading" class="text-3xl font-light">The list</h2>
     <p class="label">
@@ -123,15 +123,25 @@ alpine: true
     </details>
   </form>
 
-  <ul class="mt-14 border-t border-rule" x-cloak>
-    <template x-for="work in results" :key="work.id">
-      <li class="border-b border-rule py-10">
-        <p class="label" x-text="mechanicLabels(work)"></p>
-        <h3 class="mt-2 text-2xl font-normal sm:text-3xl"><a class="quiet-link" :href="workUrl(work)" x-text="work.title"></a></h3>
-        <p class="mt-1 italic text-ink-soft" x-text="`${work.author}, ${work.year}`"></p>
-        <p class="mt-4 max-w-prose" x-text="work.summary"></p>
-      </li>
-    </template>
+  {%- comment -%}
+    Every work is written into the page by Jekyll, so search engines and
+    browsers without JavaScript see the full list. Alpine only hides the
+    ones that don't match the current filters (x-show).
+  {%- endcomment %}
+  <ul class="mt-14 border-t border-rule">
+    {%- for work in works %}
+    {%- assign labels = "" | split: "" %}
+    {%- for id in work.mechanics %}
+    {%- assign m = site.data.mechanics | where: "id", id | first %}
+    {%- assign labels = labels | push: m.label %}
+    {%- endfor %}
+    <li class="border-b border-rule py-10" x-show="shows('{{ work.id }}')">
+      <p class="label">{{ labels | join: " · " }}</p>
+      <h3 class="mt-2 text-2xl font-normal sm:text-3xl"><a class="quiet-link" href="{{ '/works/' | append: work.id | append: '/' | relative_url }}">{{ work.title }}</a></h3>
+      <p class="mt-1 italic text-ink-soft">{{ work.author }}, {{ work.year }}</p>
+      <p class="mt-4 max-w-prose">{{ work.summary }}</p>
+    </li>
+    {%- endfor %}
   </ul>
 
   <p x-show="results.length === 0" x-cloak class="py-16 text-center italic text-ink-soft">
@@ -139,18 +149,6 @@ alpine: true
     <button type="button" @click="reset()" class="cursor-pointer not-italic text-accent underline decoration-rule underline-offset-[0.2em] hover:decoration-accent">Clear them</button>
   </p>
 
-  <noscript>
-    <ul class="mt-10 border-t border-rule">
-      {%- for work in works %}
-      <li class="border-b border-rule py-6">
-        <a class="quiet-link text-2xl" href="{{ '/works/' | append: work.id | append: '/' | relative_url }}">{{ work.title }}</a>
-        <p class="italic text-ink-soft">{{ work.author }}, {{ work.year }}</p>
-      </li>
-      {%- endfor %}
-    </ul>
-  </noscript>
-
   {%- comment -%} The data Alpine filters. `jsonify` turns the YAML into JSON. {%- endcomment %}
   <script type="application/json" id="works-data">{{ works | jsonify }}</script>
-  <script type="application/json" id="mechanics-data">{{ site.data.mechanics | jsonify }}</script>
 </section>

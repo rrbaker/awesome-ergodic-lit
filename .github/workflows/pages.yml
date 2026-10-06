@@ -33,8 +33,9 @@ jobs:
         with:
           bundler-cache: true
 
-      # Reports the site's base path (/awesome-ergodic-lit) so links
-      # stay correct even if the repo is renamed or a custom domain is added.
+      # Reports the site's base path: empty with the custom domain, or
+      # /awesome-ergodic-lit if the domain is ever removed. Links stay
+      # correct either way.
       - id: pages
         uses: actions/configure-pages@v6
 

@@ -1,17 +1,23 @@
 // Alpine component for the works filter on the home page.
 // Loaded before Alpine itself (both are `defer`, this one comes first), so the
 // component is registered by the time Alpine starts.
+//
+// The list itself is written into the page by Jekyll; this component only
+// decides which entries to show (each <li> asks `shows(id)`).
 
 document.addEventListener('alpine:init', () => {
   // Lowercase and strip accents so "cortazar" matches "Cortázar".
   const normalize = (text) =>
     text.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
 
-  Alpine.data('workFilter', (baseurl) => ({
-    works: JSON.parse(document.getElementById('works-data').textContent),
-    labels: Object.fromEntries(
-      JSON.parse(document.getElementById('mechanics-data').textContent).map((m) => [m.id, m.label])
-    ),
+  // Searchable text is normalized once up front rather than on every keystroke.
+  const works = JSON.parse(document.getElementById('works-data').textContent).map((w) => ({
+    ...w,
+    searchText: normalize(`${w.title} ${w.author} ${w.summary}`),
+  }));
+
+  Alpine.data('workFilter', () => ({
+    works,
 
     // Filter state, mirrored in the URL query string.
     q: '',
@@ -57,7 +63,7 @@ document.addEventListener('alpine:init', () => {
         (!this.physical || w.needs_physical === (this.physical === 'yes')) &&
         (!this.decade || Math.floor(w.year / 10) * 10 === Number(this.decade)) &&
         (!this.language || w.original_language === this.language) &&
-        (!q || normalize(`${w.title} ${w.author} ${w.summary}`).includes(q))
+        (!q || w.searchText.includes(q))
       );
     },
 
@@ -85,12 +91,8 @@ document.addEventListener('alpine:init', () => {
         : [...this.mechanics, id];
     },
 
-    workUrl(work) {
-      return `${baseurl}/works/${work.id}/`;
-    },
-
-    mechanicLabels(work) {
-      return work.mechanics.map((id) => this.labels[id] || id).join(' · ');
+    shows(id) {
+      return this.results.some((w) => w.id === id);
     },
   }));
 });

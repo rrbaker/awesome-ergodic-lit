@@ -8,7 +8,7 @@ A work belongs on the list if reading it takes nontrivial effort beyond turning 
 
 ## Suggest a work
 
-[Email a suggestion](https://rrbaker.github.io/awesome-ergodic-lit/about/#suggest) through the website. Include the title and author, and a sentence or two about what the reader has to do. (The address is kept off GitHub to avoid spam.)
+[Email a suggestion](https://ergodic.rrbaker.com/about/#suggest) through the website. Include the title and author, and a sentence or two about what the reader has to do. (The address is kept off GitHub to avoid spam.)
 
 ## Add a work with a pull request
 
