@@ -144,10 +144,17 @@ alpine: true
     {%- endfor %}
   </ul>
 
-  <p x-show="results.length === 0" x-cloak class="py-16 text-center italic text-ink-soft">
-    Nothing matches those filters.
-    <button type="button" @click="reset()" class="cursor-pointer not-italic text-accent underline decoration-accent underline-offset-[0.2em] hover:decoration-2">Clear them</button>
-  </p>
+  {%- comment -%}
+    x-if (not x-show) so this message isn't in the page at all until a filter
+    finds nothing. Search engines can mistake "nothing matches" text, even
+    hidden, for an empty page (a "soft 404").
+  {%- endcomment %}
+  <template x-if="results.length === 0">
+    <p class="py-16 text-center italic text-ink-soft">
+      Nothing matches those filters.
+      <button type="button" @click="reset()" class="cursor-pointer not-italic text-accent underline decoration-accent underline-offset-[0.2em] hover:decoration-2">Clear them</button>
+    </p>
+  </template>
 
   {%- comment -%} The data Alpine filters. `jsonify` turns the YAML into JSON. {%- endcomment %}
   <script type="application/json" id="works-data">{{ works | jsonify }}</script>
