@@ -31,7 +31,7 @@ description: The reading mechanics used to describe every work on the list, with
     {%- if examples.size > 0 %}
     <ul class="mt-6 space-y-2">
       {%- for w in examples %}
-      <li><a href="{{ '/works/' | append: w.id | append: '/' | relative_url }}">{{ w.title }}</a> <span class="italic text-ink-soft">{{ w.author }}, {{ w.year }}</span></li>
+      <li><a href="{{ '/works/' | append: w.id | append: '/' | relative_url }}"{% if w.title_language %} lang="{{ w.title_language }}"{% endif %}>{{ w.title }}</a> <span class="italic text-ink-soft">{{ w.author }}, {{ w.year }}</span></li>
       {%- endfor %}
     </ul>
     <p class="mt-6 text-base"><a href="{{ '/' | relative_url }}?mechanic={{ m.id }}">Show only these in the list</a></p>

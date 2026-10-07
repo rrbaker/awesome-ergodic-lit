@@ -107,8 +107,10 @@
     text-wrap: pretty;
   }
 
+  /* The underline uses the link color (not a pale tint) so links stand out from
+     body text for readers who can't tell the colors apart (WCAG 1.4.1). */
   a {
-    @apply text-accent underline decoration-rule decoration-1 underline-offset-[0.2em] transition-colors hover:decoration-accent;
+    @apply text-accent underline decoration-accent decoration-1 underline-offset-[0.2em] hover:decoration-2;
   }
 
   ::selection {

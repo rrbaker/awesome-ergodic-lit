@@ -68,6 +68,9 @@ def validate!
     seen[id] = true
 
     errors << "#{name}: year must be a number" unless w["year"].is_a?(Integer)
+    if w.key?("title_language") && !w["title_language"].to_s.match?(/\A[a-z]{2,3}(-[A-Z]{2})?\z/)
+      errors << "#{name}: title_language must be a language code like fr or pt-BR"
+    end
     errors << "#{name}: medium must be one of #{MEDIUMS.join(", ")}" unless MEDIUMS.include?(w["medium"])
     %w[needs_physical verified].each do |k|
       errors << "#{name}: #{k} must be true or false" unless [true, false].include?(w[k])

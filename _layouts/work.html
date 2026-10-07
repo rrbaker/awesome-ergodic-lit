@@ -13,7 +13,7 @@ layout: default
 
   <header class="mt-12">
     <p class="label">{{ labels | join: " · " }}</p>
-    <h1 class="mt-3 text-4xl font-light tracking-tight sm:text-6xl">{{ work.title }}</h1>
+    <h1 class="mt-3 text-4xl font-light tracking-tight sm:text-6xl"{% if work.title_language %} lang="{{ work.title_language }}"{% endif %}>{{ work.title }}</h1>
     <p class="mt-4 text-xl italic text-ink-soft">{{ work.author }}, {{ work.year }}</p>
   </header>
 

@@ -46,7 +46,7 @@ alpine: true
     <h2 id="list-heading" class="text-3xl font-light">The list</h2>
     <p class="label">
       <span role="status" x-text="summary">{{ works.size }} works</span>
-      <button type="button" x-show="active" x-cloak @click="reset()" class="ml-3 cursor-pointer text-accent underline decoration-rule underline-offset-[0.2em] hover:decoration-accent">Clear filters</button>
+      <button type="button" x-show="active" x-cloak @click="reset()" class="ml-3 cursor-pointer text-accent underline decoration-accent underline-offset-[0.2em] hover:decoration-2">Clear filters</button>
     </p>
   </div>
   <p class="mt-3 text-sm text-ink-soft">
@@ -137,7 +137,7 @@ alpine: true
     {%- endfor %}
     <li class="border-b border-rule py-10" x-show="shows('{{ work.id }}')">
       <p class="label">{{ labels | join: " · " }}</p>
-      <h3 class="mt-2 text-2xl font-normal sm:text-3xl"><a class="quiet-link" href="{{ '/works/' | append: work.id | append: '/' | relative_url }}">{{ work.title }}</a></h3>
+      <h3 class="mt-2 text-2xl font-normal sm:text-3xl"><a class="quiet-link" href="{{ '/works/' | append: work.id | append: '/' | relative_url }}"{% if work.title_language %} lang="{{ work.title_language }}"{% endif %}>{{ work.title }}</a></h3>
       <p class="mt-1 italic text-ink-soft">{{ work.author }}, {{ work.year }}</p>
       <p class="mt-4 max-w-prose">{{ work.summary }}</p>
     </li>
@@ -146,7 +146,7 @@ alpine: true
 
   <p x-show="results.length === 0" x-cloak class="py-16 text-center italic text-ink-soft">
     Nothing matches those filters.
-    <button type="button" @click="reset()" class="cursor-pointer not-italic text-accent underline decoration-rule underline-offset-[0.2em] hover:decoration-accent">Clear them</button>
+    <button type="button" @click="reset()" class="cursor-pointer not-italic text-accent underline decoration-accent underline-offset-[0.2em] hover:decoration-2">Clear them</button>
   </p>
 
   {%- comment -%} The data Alpine filters. `jsonify` turns the YAML into JSON. {%- endcomment %}

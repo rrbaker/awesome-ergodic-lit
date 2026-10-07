@@ -4,6 +4,8 @@
 # Fields:
 #   id                kebab-case, unique; becomes the page URL /works/<id>/
 #   title, author     as commonly published
+#   title_language    optional; language code (fr, es, de...) when the title
+#                     isn't English, so screen readers pronounce it correctly
 #   year              first publication
 #   original_language
 #   medium            print | digital | hybrid
@@ -164,6 +166,7 @@
 
 - id: cent-mille-milliards-de-poemes
   title: Cent mille milliards de poèmes
+  title_language: fr
   author: Raymond Queneau
   year: 1961
   original_language: French
