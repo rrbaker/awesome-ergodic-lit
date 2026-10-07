@@ -33,14 +33,6 @@
     University of Bergen research database of electronic literature.
   verified: false
 
-- name: Cybertext Yearbook database
-  category: scholarship
-  url: http://cybertext.hum.jyu.fi/
-  description: >-
-    Free online edition of the Cybertext Yearbooks; the 2006 volume, Ergodic
-    Histories, covers non-Anglophone and proto-hypertext examples.
-  verified: false
-
 - name: "Goodreads: ergodic-literature shelf"
   category: list
   url: https://www.goodreads.com/shelf/show/ergodic-literature

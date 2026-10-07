@@ -170,7 +170,6 @@ Multiple readers' annotations form a parallel narrative.
 ## Scholarship
 
 - [Cybertext: Perspectives on Ergodic Literature](https://archive.org/details/cybertextperspec0000aars/mode/2up) - Espen J. Aarseth’s 1997 book, which introduced the term ergodic literature.
-- [Cybertext Yearbook database](http://cybertext.hum.jyu.fi/) - Free online edition of the Cybertext Yearbooks; the 2006 volume, Ergodic Histories, covers non-Anglophone and proto-hypertext examples.
 
 ## Communities
 

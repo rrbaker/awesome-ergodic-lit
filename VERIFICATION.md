@@ -59,7 +59,6 @@ These are on the Goodreads list, but their traversal is essentially linear. Each
 | Electronic Literature Directory | 200 | Confirmed (`verified: true`) |
 | ELO Glossary | 200 | Confirmed (`verified: true`) |
 | ELMCIP Knowledge Base | 403 (Cloudflare challenge) | **Open in a browser and confirm** |
-| Cybertext Yearbook database | 200; page title "CyberText Yearbook", says it became the free Cybertext Database in 2007, 73 articles | URL found: `http://cybertext.hum.jyu.fi/`; ready to flip after a look |
 | Goodreads: ergodic-literature shelf | 200 | Confirmed (`verified: true`) |
 | Goodreads: Ergodic Literature list | 200; title "Ergodic Literature (69 books)" | URL found: `/list/show/90232.Ergodic_Literature`; ready to flip after a look |
 | Pagebound: Ergodic Literature | 200; page text matches | Confirmed (`verified: true`) |
